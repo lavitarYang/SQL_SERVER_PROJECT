@@ -1,28 +1,32 @@
-/*create database FRAME*/
+--create database FRAME
 use FRAME
 /*
 drop table  if exists CAREER 
 create table CAREER(
-	CareerId int not null identity(1,1) primary key,
+	CareerID int not null identity(1,1),
+	constraint PK_CAREER primary key(CareerID),
 	CareerName varchar(255) not null,
 	Attribute varchar(255) not null,
 	WorkInfo varchar(255) null
 );
 drop table if exists INDICATOR
 create table INDICATOR(
-	AttributeID int not null IDENTITY(1,1) PRIMARY KEY,
+	AttributeID int not null IDENTITY(1,1),
+	constraint PK_INDICATOR primary key(AttributeID),
 	Attribute varchar(25) not null,
 	Advence varchar(255) not null,
-Possibility varchar(255) not null,
+	Possibility varchar(255) not null
 );
 drop table if exists RELATIVE_SUBJECT
 create table RELATIVE_SUBJECT(
-	SqenID int not null identity(1,1) primary key, 
+	SqenID int not null identity(1,1),
+	constraint PK_RELATIVE_SUBJECT primary key(SqenID), 
 	SubjectName varchar(255) not null 
 );
 drop table if exists USERINFO
 create table USERINFO(
-	UserID int not null identity(1,1) primary key,
+	UserID int not null identity(1,1),
+	constraint PK_USERINFO primary key(UserID),
 	UserName varchar(255) not null,
 	Email varchar(255) null,
 	Age int null,
@@ -30,13 +34,15 @@ create table USERINFO(
 );
 drop table if exists HISTORY
 create table HISTORY(
-	UserID int foreign key references USERINFO(UserID) on update cascade on delete cascade,
-	Record int not null identity(1,1),
-	unique(UserID,Record),
-	primary key(UserID,Record) 
+	UserID int not null,
+	constraint FK_USERINFO_H foreign key(UserID) references USERINFO(UserID) 
+	on update cascade on delete cascade,
+	Record int not null ,
+	constraint UC_HISTORY unique(UserID,Record),
+	constraint PK_HISTORY primary key(UserID,Record) 
 );
 */
-/* /*¾Ç¸sªí³æ--´¡¤J¸ê®Æ¦æ*/
+/* --¾Ç¸sªí³æ:´¡¤J¸ê®Æ¦æ
 insert into RELATIVE_SUBJECT values ('¦a²y»PÀô¹Ò¾Ç¸s');
 insert into RELATIVE_SUBJECT values ('¤uµ{¾Ç¸s');
 insert into RELATIVE_SUBJECT values ('¼Æ²z¤Æ¾Ç¸s');
@@ -57,7 +63,7 @@ insert into RELATIVE_SUBJECT values ('¥~»y¾Ç¸s');
 insert into RELATIVE_SUBJECT values ('«Ø¿v»P³]­p¾Ç¸s');
 insert into RELATIVE_SUBJECT values ('±Ð¨|¾Ç¸s');
 */
-/*/*«ü¼Ðªí³æ--´¡¤J¸ê®Æ¦æ*/
+/*--«ü¼Ðªí³æ:´¡¤J¸ê®Æ¦æ
 insert into INDICATOR values ('Social','¨ó½Õ¤H»Ú¬¡°Ê;µo²{»P¸Ñ¨M¥L¤H°ÝÃD;Àu¨qªº¤H»Ú»P±¡ºüºÞ²z¯à¤O','±Ð¨|¡BªÀ¤u¤ß²z¡BÂåÅ@»P©v±Ðµ¥»â°ì')
 insert into INDICATOR values ('Conventional','µ½©ó¿Ä¼Æ¦r¹Bºâ;¸ê°T³B²z¡B²ÕÂ´¡B³W¹º»P²Î¾ã;¤å®Ñ¡B¦æ¬F¤è­±¨ã³Æºë½Tªº³B¸Ì§Þ¥©','°]°Èª÷¿Ä¡B¯S§U¯µ®Ñ¡B·|­p¡B¦æ¬Fµ¥»â°ì')
 insert into INDICATOR values ('Artistic','¹B¥Î·Q¹³¤O»P³Ð³y¤O²£¥ÍÆF·P;°µ¨Æ³Ð·s¡B¼u©Ê¦ÓÆF¬¡;µ½©ó³]­p»P³Ð³y¡A¨ã¦³¤åÃÀ¤Ñ½á','ÃÀ³N¡B³]­pµ¥»â°ì')
@@ -66,7 +72,7 @@ insert into INDICATOR values ('Enterprising','¯à§ä¥X°Ó·~©ÎÀò§Q¾÷·|;¾A¦XºÞ²z»PºÊ·
 insert into INDICATOR values ('Investigativ','²z¸Ñ¡B¸Ñ¨M¬ì¾Ç©Î¼Æ¾Ç°ÝÃD;¬ã¨s¤ÀªR»P¸ÑÄÀ¸ê®Æ¡Bºc·Q»P²z½×;©â¶H«ä¦Ò','²z¤u¥ÍÂå©Î¤H¤å¬ì¾Ç»â°ì')
 */
 
-/*
+/*--this has no use anymore
 drop table if exists INTERMEDIARY_HISTORY
 create table INTERMEDIARY_HISTORY(
 	UserID int not null,
@@ -75,16 +81,31 @@ create table INTERMEDIARY_HISTORY(
 	primary key(UserID,Record),
 	CareerID int not null foreign key references CAREER(CareerID)
 );
+
+
 drop table if exists INTERMEDIARY_CAREER_SUBJECT
 create table INTERMEDIARY_CAREER_SUBJECT(
-	CareerID int foreign key references CAREER(CareerID) on update cascade on delete cascade primary key,
-	SqenID int foreign key references RELATIVE_SUBJECT(SqenID)on update cascade on delete cascade
+	CareerID int not null,
+	constraint FK_CAREER_CS foreign key(CareerID) references CAREER(CareerID) 
+	on update cascade on delete cascade,
+	SqenID int not null,
+	constraint FK_RELATIVE_SUBJECT foreign key(SqenID) references RELATIVE_SUBJECT(SqenID)
+	on update cascade on delete cascade,
+	constraint UC_INTER_CS unique(CareerID,SqenID),
+	constraint PK_INTER_CS primary key(CareerID,SqenID)
 );
 drop table if exists INTERMEDIARY_CAREER_INDICATOR
 create table INTERMEDIARY_CAREER_INDICATOR(
-	CareerID int foreign key references CAREER(CareerID) on update cascade on delete cascade primary key,
-	AttributeID int foreign key references INDICATOR(AttributeID) on update cascade on delete cascade
+	CareerID int not null,
+	constraint FK_CAREER_CI foreign key(CareerID) references CAREER(CareerID) 
+	on update cascade on delete cascade ,
+	AttributeID int not null,
+	constraint FK_INDICATOR_CI foreign key(AttributeID) references INDICATOR(AttributeID) 
+	on update cascade on delete cascade,
+	constraint UC_INTER_CI unique(CareerID,AttributeID),
+	constraint PK_INTER_CI primary key(CareerID,AttributeID)
 );
+
 */
 
 /*
