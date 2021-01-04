@@ -40,11 +40,15 @@ create table HISTORY(
 	UserID int not null,
 	constraint FK_USERINFO_H foreign key(UserID) references USERINFO(UserID) 
 	on update cascade on delete cascade,
+	CareerID int not null,
+	constraint FK_CAREER_H foreign key(CareerID) references CAREER(CareerID)
+	on update cascade on delete cascade,
 	Record int not null ,
-	constraint UC_HISTORY unique(UserID,Record),
-	constraint PK_HISTORY primary key(UserID,Record) 
+	constraint UC_HISTORY unique(UserID,Record,CareerID),
+	constraint PK_HISTORY primary key(UserID,Record,CareerID) 
 );
 */
+
 /*
 	--職業表單:插入資料行
 	insert into CAREER values('神職人員','Soclal','負責宗教活動與儀式，提供信仰、精神和活動等方面的輔導')
@@ -223,5 +227,7 @@ create table INTERMEDIARY_CAREER_INDICATOR(
 /*
 select *
 from RELATIVE_SUBJECT
+select *
+from CAREER
 */
 
