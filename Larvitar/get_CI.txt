@@ -1,0 +1,23 @@
+import java.util.*;
+inport java.io.*;
+class intertablequery{
+	public static void main(String args[]){ throws IOException
+		try{	
+			List<String> list = new ArrayList<>();
+			File text = new File("file2.txt");
+			Scanner sc = new Scanner(text);
+			sc.nextLine();
+			while(sc.hasNextLine()){
+				list.add("insert into INTERMEDIARY_CAREER_INDICATOR values(\'".concat(sc.nextLine().replace("\t","\',\'")).concat("\'\n"));
+			}
+			text.close();
+			FileWriter f =new FileWriter("IQuery.txt",true);
+			for(String s: list){
+				f.write(s);
+			}
+		}catch(FileNotFoundException ex){
+			System.out,print("FIle not found");
+		}
+							
+	}
+}
