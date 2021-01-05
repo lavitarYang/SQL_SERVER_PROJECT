@@ -1,9 +1,13 @@
+--第一步create database解開註解
 --create database FRAME
-use FRAME
+--第二步use database解開註解
+--use FRAME
 
+/*用法
+!!!!!除了第二步其餘解開執行完之後，皆需要把它註解回去!!!!
+*/
 
-
-/*
+/*--第三步解開我
 drop table  if exists CAREER 
 create table CAREER(
 	CareerID int not null identity(1,1),
@@ -47,11 +51,11 @@ create table HISTORY(
 	constraint UC_HISTORY unique(UserID,Record,CareerID),
 	constraint PK_HISTORY primary key(UserID,Record,CareerID) 
 );
-*/
+*/--第三步
 
-/*
+/*--第五步解開我
 	--職業表單:插入資料行
-	insert into CAREER values('神職人員','Soclal','負責宗教活動與儀式，提供信仰、精神和活動等方面的輔導')
+insert into CAREER values('神職人員','Soclal','負責宗教活動與儀式，提供信仰、精神和活動等方面的輔導')
 insert into CAREER values('家教','Soclal','在正規學校學習外，為學生提供格外學業指導')
 insert into CAREER values('補習班老師','Soclal','在正規學校學習外，為學生提供格外學業指導')
 insert into CAREER values('教授','Soclal','從事學術研究，在大專院校進行研究與教學工作')
@@ -178,27 +182,18 @@ insert into RELATIVE_SUBJECT values ('藝術學群');
 insert into RELATIVE_SUBJECT values ('外語學群');
 insert into RELATIVE_SUBJECT values ('建築與設計學群');
 insert into RELATIVE_SUBJECT values ('教育學群');
-*/
-/*--指標表單:插入資料行
+
+	--指標表單:插入資料行
 insert into INDICATOR values ('Social','協調人際活動;發現與解決他人問題;優秀的人際與情緒管理能力','教育、社工心理、醫護與宗教等領域')
 insert into INDICATOR values ('Conventional','善於融數字運算;資訊處理、組織、規劃與統整;文書、行政方面具備精確的處裡技巧','財務金融、特助秘書、會計、行政等領域')
 insert into INDICATOR values ('Artistic','運用想像力與創造力產生靈感;做事創新、彈性而靈活;善於設計與創造，具有文藝天賦','藝術、設計等領域')
 insert into INDICATOR values ('Realistic','機械與設備操作，對工具運用、設備操作、廚藝手工與飼養動物有天賦','機械電子、農林漁牧、運動或建築工藝領域')
 insert into INDICATOR values ('Enterprising','能找出商業或獲利機會;適合管理與監督工作;具有銷售與說服技巧的潛力','企業領導、行銷企劃、法律政治等領域')
 insert into INDICATOR values ('Investigativ','理解、解決科學或數學問題;研究分析與解釋資料、構想與理論;抽象思考','理工生醫或人文科學領域')
-*/
-
-/*--this has no use anymore
-drop table if exists INTERMEDIARY_HISTORY
-create table INTERMEDIARY_HISTORY(
-	UserID int not null,
-	Record int not null,
-	constraint PIH foreign key(UserID,Record) references HISTORY(UserID,Record),
-	primary key(UserID,Record),
-	CareerID int not null foreign key references CAREER(CareerID)
-);
+*/--第五步
 
 
+/*--第四步解開我
 drop table if exists INTERMEDIARY_CAREER_SUBJECT
 create table INTERMEDIARY_CAREER_SUBJECT(
 	CareerID int not null,
@@ -221,13 +216,14 @@ create table INTERMEDIARY_CAREER_INDICATOR(
 	constraint UC_INTER_CI unique(CareerID,AttributeID),
 	constraint PK_INTER_CI primary key(CareerID,AttributeID)
 );
+*/--第四步
 
-*/
-
-/*
+/*--第六步解開我
 select *
 from RELATIVE_SUBJECT
 select *
 from CAREER
-*/
+select *
+from INDICATOR
+*/--第六步
 
